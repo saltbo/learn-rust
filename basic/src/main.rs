@@ -2,12 +2,11 @@
 // use std::thread;
 // use std::time::Duration;
 
-mod samedir;
 mod package;
+mod samedir;
 
-use crate::samedir::*;
 use crate::package::user::*;
-
+use crate::samedir::*;
 
 fn main() {
     // let x = "abc";
@@ -49,10 +48,10 @@ fn main() {
 
     if true {
         println!("true");
-        33     // 分支的最后一条代码计算结果赋值给x，不能分号结尾
+        33 // 分支的最后一条代码计算结果赋值给x，不能分号结尾
     } else {
         println!("false");
-        44     // 分支的最后一条代码计算结果赋值给x，不能分号结尾
+        44 // 分支的最后一条代码计算结果赋值给x，不能分号结尾
     };
     let x = 1;
     println!("{}", x);
@@ -75,7 +74,7 @@ fn main() {
     let mut origin2 = Point2(0, 0);
     origin2.0 = 13;
 
-    println!("{:?},{:?}", origin, origin2)
+    println!("{:?},{:?}", origin, origin2);
 
     // Basic C-like enum
     enum Direction {
