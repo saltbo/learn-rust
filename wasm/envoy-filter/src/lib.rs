@@ -7,6 +7,7 @@ use std::time::Duration;
 
 #[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 use getrandom::getrandom;
+// use gloo_net::http::Request;
 
 proxy_wasm::main! {{
     proxy_wasm::set_log_level(LogLevel::Trace);
@@ -20,6 +21,20 @@ impl Context for HelloWorld {}
 impl RootContext for HelloWorld {
     fn on_vm_start(&mut self, _: usize) -> bool {
         info!("Hello, World!");
+
+        let response = self.dispatch_http_call(
+            "www.baidu.com",
+            vec![
+                (":method", "GET"),
+                (":path", "/bytes/1"),
+                (":authority", "httpbin.org"),
+            ],
+            None,
+            vec![],
+            Duration::from_secs(5),
+        );
+        info!("{}", response.unwrap());
+
         self.set_tick_period(Duration::from_secs(5));
         true
     }
@@ -39,3 +54,14 @@ impl RootContext for HelloWorld {
         }
     }
 }
+
+// async fn test_http() -> i64 {
+//     let response = Request::get("https://www.rust-lang.org").send().await;
+//     if response.is_err() {
+//         return 0;
+//     }
+//
+//     let body = response.unwrap().text().await.unwrap();
+//     println!("body = {:?}", body);
+//     return 1;
+// }

@@ -1,34 +1,56 @@
-// use std::sync::mpsc;
-// use std::thread;
-// use std::time::Duration;
+#[derive(Debug)]
+#[allow(dead_code)]
 
-mod package;
-mod samedir;
+// Basic C-like enum
+enum Direction {
+    Left,
+    Right,
+    Up,
+    Down,
+}
 
-use crate::package::user::*;
-use crate::samedir::*;
+// Enum with fields
+#[derive(Debug)]
+enum OptionalI32 {
+    AnI32(i32),
+    Nothing,
+}
 
+#[allow(dead_code)]
 fn main() {
-    // let x = "abc";
-    // let y = "abc";
-    // longest1(x);
-    // longest2(x, y);
+    learn_var();
+    learn_const();
+    learn_enum();
+    learn_array();
+    learn_ifelse();
+    learn_struct();
+}
 
-    let mut user1 = User::new("someusername123", "someone@example.com", 1, true);
-    println!("{:?}", user1);
-    user1.nickname = "test";
-    println!("{:?}", user1);
-
-    user1.updateUsername("aaa");
-    println!("{:?}", user1);
-
+// 变量
+fn learn_var() {
     let aaa: i32;
+    aaa = 0;
     let abc = 1;
     let xx: i32 = 133;
-
-    // String
     let str = "abc";
+    println!("{},{},{},{}", aaa, abc, xx, str);
+}
 
+// 常量
+fn learn_const() {
+    const AAA: i32 = 1;
+    println!("{}", AAA);
+}
+
+// 枚举
+fn learn_enum() {
+    let up = Direction::Up;
+    let a = OptionalI32::AnI32(10);
+    let b = OptionalI32::Nothing;
+    println!("{:?},{:?},{:?},{:?}", up, OptionalI32::Nothing, a, b);
+}
+
+fn learn_array() {
     let mut array: [i32; 4] = [1, 2, 3, 4];
     array[0] = 44;
     println!("{:?}", array);
@@ -42,7 +64,9 @@ fn main() {
     println!("{:?}", vec);
     vec[0] = "222";
     println!("{:?}", vec);
+}
 
+fn learn_ifelse() {
     let value = if true { "good" } else { "bad" };
     println!("{:?}", value);
 
@@ -55,7 +79,9 @@ fn main() {
     };
     let x = 1;
     println!("{}", x);
+}
 
+fn learn_struct() {
     // Struct
     #[derive(Debug)]
     struct Point {
@@ -75,25 +101,4 @@ fn main() {
     origin2.0 = 13;
 
     println!("{:?},{:?}", origin, origin2);
-
-    // Basic C-like enum
-    enum Direction {
-        Left,
-        Right,
-        Up,
-        Down,
-    }
-
-    let up = Direction::Up;
-
-    // Enum with fields
-    enum OptionalI32 {
-        AnI32(i32),
-        AAA,
-        Nothing,
-    }
-
-    OptionalI32::AAA;
-    // bff
-    // 接口代理，静态文件挂载，API聚合，鉴权，权限控制，限流，熔断降级
 }
