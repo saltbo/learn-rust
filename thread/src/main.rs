@@ -39,10 +39,6 @@ fn main() {
         tx.send(123);
         tx.send(123)
     });
-    let m = Mutex::new(234);
-    let mut num = m.lock().unwrap();
-    *num = 111;
-    println!("{}", num);
 
     for received in rx.iter() {
         println!("Got: {}", received);
@@ -62,5 +58,11 @@ fn main() {
     });
 
     println!("{:?}", m);
+
+    // mutex
+    let m = Mutex::new(234);
+    let mut num = m.lock().unwrap();
+    *num = 111;
+    println!("{}", num);
 }
 
